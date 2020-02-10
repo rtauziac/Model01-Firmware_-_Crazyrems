@@ -538,8 +538,10 @@ void setup() {
 
   // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
   // This draws more than 500mA, but looks much nicer than a dimmer effect
-  LEDRainbowEffect.brightness(150);
-  LEDRainbowWaveEffect.brightness(150);
+  LEDRainbowEffect.brightness(100);
+  LEDRainbowEffect.update_delay(25);
+  LEDRainbowWaveEffect.brightness(100);
+  LEDRainbowWaveEffect.update_delay(25);
 
   // Set the action key the test mode should listen for to Left Fn
   HardwareTestMode.setActionKey(R3C6);
