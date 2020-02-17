@@ -142,7 +142,7 @@ enum { MACRO_VERSION_INFO,
   *
   */
 
-enum { PRIMARY, NUMPAD, FUNCTION }; // layers
+enum { PRIMARY, NUMPAD, FUNCTION, LAYLEDS }; // layers
 
 
 /**
@@ -225,7 +225,7 @@ KEYMAPS(
 #elif defined (PRIMARY_KEYMAP_CUSTOM)
   // Edit this keymap to make a custom layout
   [PRIMARY] = KEYMAP_STACKED
-  (Key_LeftAlt,  Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
+  (Key_LeftAlt,  Key_1, Key_2, Key_3, Key_4, Key_5, ShiftToLayer(LAYLEDS),
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
@@ -264,18 +264,33 @@ KEYMAPS(
 
   [FUNCTION] =  KEYMAP_STACKED
   (Key_PrintScreen,  Key_F1,                     Key_F2,       Key_F3,              Key_F4,        Key_F5,           Key_CapsLock,
-   Key_Tab,          ___,                        Key_mouseUp,  System_ContextMenu,  Key_mouseBtnR, Key_mouseWarpEnd, Key_mouseWarpNE,
-   Key_Home,         Key_mouseL,                 Key_mouseDn,  Key_mouseR,          Key_mouseBtnL, Key_mouseWarpNW,
-   Key_End,          Key_NonUsBackslashAndPipe,  Key_Insert,   ___,                 Key_mouseBtnM, Key_mouseWarpSW,  Key_mouseWarpSE,
+   Key_Tab,          ___,                        Key_mouseUp,  Key_mouseScrollUp,  Key_mouseBtnR, Key_mouseWarpEnd, Key_mouseWarpNE,
+   Key_Home,         Key_mouseL,                 Key_mouseDn,  Key_mouseR,         Key_mouseBtnL, Key_mouseWarpNW,
+   Key_End,          Key_NonUsBackslashAndPipe,  Key_Insert,   Key_mouseScrollDn,  Key_mouseBtnM, Key_mouseWarpSW,  Key_mouseWarpSE,
    ___, Key_Delete, ___, ___,
    ___,
 
    Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, ___,                      ___,                      Key_Minus,       Key_Equals,       Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
-   LCTRL(Key_LeftBracket),               Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,             Key_Backslash,    ___,
+   LCTRL(Key_LeftBracket),     Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,             Key_Backslash,    ___,
    ___, ___, Key_Enter, ___,
-   ___)
+   ___),
+
+   [LAYLEDS] =  KEYMAP_STACKED
+  (___,                   ___, ___, ___, ___, ___, ___,
+   ___,                   ___, ___, ___, ___, ___, ___,
+   Key_LEDEffectPrevious, ___, ___, ___, ___, ___,
+   Key_LEDEffectNext,     ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___,
+   ___,
+
+   ___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___, ___,
+        ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___,
+   ___),
 ) // KEYMAPS(
 
 /* Re-enable astyle's indent enforcement */
@@ -539,9 +554,9 @@ void setup() {
   // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
   // This draws more than 500mA, but looks much nicer than a dimmer effect
   LEDRainbowEffect.brightness(100);
-  LEDRainbowEffect.update_delay(25);
+  LEDRainbowEffect.update_delay(10);
   LEDRainbowWaveEffect.brightness(100);
-  LEDRainbowWaveEffect.update_delay(25);
+  LEDRainbowWaveEffect.update_delay(10);
 
   // Set the action key the test mode should listen for to Left Fn
   HardwareTestMode.setActionKey(R3C6);
