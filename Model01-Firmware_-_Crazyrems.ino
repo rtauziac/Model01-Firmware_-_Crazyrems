@@ -264,7 +264,7 @@ KEYMAPS(
 
   [FUNCTION] =  KEYMAP_STACKED
   (Key_PrintScreen,  Key_F1,                     Key_F2,       Key_F3,              Key_F4,        Key_F5,           Key_CapsLock,
-   Key_Tab,          ___,                        Key_mouseUp,  Key_mouseScrollUp,  Key_mouseBtnR, Key_mouseWarpEnd, Key_mouseWarpNE,
+   ___,              ___,                        Key_mouseUp,  Key_mouseScrollUp,  Key_mouseBtnR, Key_mouseWarpEnd, Key_mouseWarpNE,
    Key_Home,         Key_mouseL,                 Key_mouseDn,  Key_mouseR,         Key_mouseBtnL, Key_mouseWarpNW,
    Key_End,          Key_NonUsBackslashAndPipe,  Key_Insert,   Key_mouseScrollDn,  Key_mouseBtnM, Key_mouseWarpSW,  Key_mouseWarpSE,
    ___, Key_Delete, ___, ___,
@@ -554,9 +554,9 @@ void setup() {
   // We set the brightness of the rainbow effects to 150 (on a scale of 0-255)
   // This draws more than 500mA, but looks much nicer than a dimmer effect
   LEDRainbowEffect.brightness(100);
-  LEDRainbowEffect.update_delay(10);
+  LEDRainbowEffect.update_delay(1);
   LEDRainbowWaveEffect.brightness(100);
-  LEDRainbowWaveEffect.update_delay(10);
+  LEDRainbowWaveEffect.update_delay(1);
 
   // Set the action key the test mode should listen for to Left Fn
   HardwareTestMode.setActionKey(R3C6);
@@ -565,7 +565,7 @@ void setup() {
   // 'BlazingTrail'. For details on other options, see
   // https://github.com/keyboardio/Kaleidoscope/blob/master/doc/plugin/LED-Stalker.md
   StalkerEffect.variant = STALKER(Rainbow);
-  StalkerEffect.step_length = 25;
+  StalkerEffect.step_length = 24;
 
   // We want to make sure that the firmware starts with LED effects off
   // This avoids over-taxing devices that don't have a lot of power to share
@@ -589,6 +589,8 @@ void setup() {
   // so I make it a bit faster
   MouseKeys.speedDelay = 1;
   MouseKeys.accelDelay = 8;
+  MouseKeys.wheelSpeed = 1;
+  MouseKeys.wheelDelay = 85;
 }
 
 /** loop is the second of the standard Arduino sketch functions.
